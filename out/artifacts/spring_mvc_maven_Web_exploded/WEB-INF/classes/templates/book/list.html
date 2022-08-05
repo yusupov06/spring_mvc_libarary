@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head th:include="fragment.html :: head('Home Page')"></head>
+<body>
+
+<section th:include="fragment.html :: navbar"></section>
+
+
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/books">Books</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"> List</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+
+
+                <li class="page-item" th:if="${page.hasPrevious}">
+                    <a class="page-link" th:href="@{'?page='+${page.previous}}" tabindex="-1">Previous</a>
+                </li>
+                <th:block th:each="pageIndex: ${#numbers.sequence(0,page.totalPages)}">
+                    <li class="page-item" th:if="${page.currentPage == pageIndex}" th:classappend="active"><a
+                            class="page-link" th:href="@{'?page=' + ${pageIndex}}" th:text="${pageIndex}"></a></li>
+                    <li class="page-item" th:unless="${page.currentPage == pageIndex}"><a class="page-link"
+                                                                                          th:href="@{'?page=' + ${pageIndex}}"
+                                                                                          th:text="${pageIndex}"></a>
+                    </li>
+                </th:block>
+
+                <li class="page-item" th:if="${page.hasNext}">
+                    <a class="page-link" th:href="@{'?page='+${page.next}}">Next</a>
+                </li>
+
+            </ul>
+        </nav>
+
+        <div class="row">
+            <div class="col-md-10 offset-1">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Order</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Page Count</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="book : ${page.books}">
+                        <tr>
+                            <td th:text="${book.id}"></td>
+                            <td th:text="${book.title}"></td>
+                            <td th:text="${book.author}"></td>
+                            <td th:text="${book.pageCount}"></td>
+                            <td>
+                                <a th:href="@{'/update?book=' + ${book.id} + '&page=' + ${page.currentPage}}"
+                                   class="btn btn-warning">Update</a> ||
+                                <a th:href="@{'/delete?book=' + ${book.id} + '&page=' + ${page.currentPage}}"
+                                   class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    </th:block>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</body>
+</html>

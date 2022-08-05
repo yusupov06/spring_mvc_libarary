@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head th:include="fragment.html :: head('Update Book Page')"></head>
+<body>
+<section th:include="fragment.html :: navbar"></section>
+
+
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/books">Books</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"> Update</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card mb-6 offset-3">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-md-6 offset-3">
+                                <form method="post" th:action="@{'/update?book='+${book.id}+'&page='+${page}}">
+                                    <div class="form-group">
+                                        <label for="title">Book Title</label>
+                                        <input name="title" autocomplete="off"
+                                               placeholder="Book title " required="" id="title"
+                                               type="text"
+                                               class="is-untouched is-pristine av-valid form-control"
+                                               th:value="${book.title}">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="author">Book Author</label>
+                                        <input name="author" autocomplete="off"
+                                               placeholder=" Book Author " required="" id="author"
+                                               type="text"
+                                               class="is-untouched is-pristine av-valid form-control"
+                                               th:value="${book.author}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pageCount">Book Page Count</label>
+                                        <input name="pageCount" autocomplete="off"
+                                               placeholder="pages" required="" id="pageCount"
+                                               type="number"
+                                               class="is-untouched is-pristine av-valid form-control"
+                                               th:value="${book.pageCount}">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary"> Update</button>
+                                </form>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section th:include="fragment.html :: js_resourses"></section>
+</body>
+</html>
+
+<!--
+<div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Book title</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">
+                                    <input name="title" autocomplete="off"
+                                           placeholder="Book title " required="" id="title"
+                                           type="text"
+                                           class="is-untouched is-pristine av-valid form-control"
+                                           th:value="${book.title}">
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+
+                            <div class="col-sm-3">
+                                <p class="mb-0">Book Author</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">
+                                    <input name="author" autocomplete="off"
+                                           placeholder=" Book Author " required="" id="author"
+                                           type="text"
+                                           class="is-untouched is-pristine av-valid form-control"
+                                           th:value="${book.author}">
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Book Page count</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">
+                                    <input name="pageCount" autocomplete="off"
+                                           placeholder="pages" required="" id="pageCount"
+                                           type="number"
+                                           class="is-untouched is-pristine av-valid form-control"
+                                           th:value="${book.pageCount}">
+                                </p>
+                            </div>
+                        </div>
+                    </div>-->

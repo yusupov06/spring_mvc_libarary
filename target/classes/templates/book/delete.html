@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head th:include="fragment.html :: head('Delete Book Page')"></head>
+<body>
+<section th:include="fragment.html :: navbar"></section>
+
+
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/books">Books</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"> Delete </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6 offset-3">
+
+                <div th:if="${error != null}" class="alert alert-danger">
+                    <p th:text="${error}"></p>
+                </div>
+                <div th:unless="${error != null}">
+                    <h1 th:text="${book.title}"></h1>
+                    <div class="alert alert-warning">
+                        <h2>Are You sure delete this book</h2>
+                    </div>
+                    <form method="post" th:action="@{'/delete?book='+${book.id}+'&page='+${page}}">
+                        <a th:href="@{'/books?page='+${page}}" class="btn btn-primary focus">Back</a>
+                        <button type="submit" class="btn btn-danger">Yes</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section th:include="fragment.html :: js_resourses"></section>
+</body>
+</html>
